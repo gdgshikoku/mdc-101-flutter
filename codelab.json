@@ -1,0 +1,21 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2022-08-16T10:46:44Z",
+  "id": "mdc-101-flutter",
+  "duration": 0,
+  "title": "MDC-101 Flutter:Material Components (MDC) Basics",
+  "authors": "Kenichi Tatsuhama",
+  "summary": "https://codelabs.developers.google.com/codelabs/mdc-101-flutter 日本語版",
+  "source": "1oq95g3-BCWuYJr3SeTSV7lfZn7M34Sn5-Qu4OgiyoSo",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [],
+  "tags": [],
+  "feedback": "https://twitter.com/tatsuhama50",
+  "url": "mdc-101-flutter"
+}

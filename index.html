@@ -1,0 +1,365 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>MDC-101 Flutter:Material Components (MDC) Basics</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="mdc-101-flutter"
+                  title="MDC-101 Flutter:Material Components (MDC) Basics"
+                  environment="web"
+                  feedback-link="https://twitter.com/tatsuhama50">
+    
+      <google-codelab-step label="はじめに" duration="0">
+        <h2 is-upgraded><strong>Flutter のマテリアル デザインとマテリアル コンポーネントとは何ですか?</strong></h2>
+<p><strong>マテリアル デザイン</strong>は、大胆で美しいデジタル製品を構築するためのシステムです。 スタイル、ブランディング、インタラクション、モーションを一貫した一連の原則とコンポーネントの下で統合することにより、製品チームは設計の可能性を最大限に引き出すことができます。</p>
+<p><strong>Flutter 用マテリアル コンポーネント (MDC-Flutter) </strong>は、デザインとエンジニアリングを、アプリやプラットフォーム全体で一貫したユーザー エクスペリエンスを作成するコンポーネントのライブラリと結び付けます。 マテリアル デザイン システムが進化するにつれて、これらのコンポーネントは更新され、Google のフロントエンド開発基準に準拠して、一貫したピクセル パーフェクトな実装が保証されます。 MDC は、Android、iOS、および Web でも利用できます。</p>
+<p>この Codelab では、MDC Flutter のいくつかのコンポーネントを使用してログイン ページを作成します。</p>
+<h2 is-upgraded><strong>構築するもの</strong></h2>
+<p>この Codelab は、衣料品や家庭用品を販売する e コマース アプリ、<strong>Shrine</strong> というアプリの作成をガイドする 4 つの Codelab の最初のものです。 MDC-Flutter を使用して、任意のブランドやスタイルを反映するようにコンポーネントをカスタマイズする方法を示します。</p>
+<p>この Codelab では、以下を含む Shrine のログイン ページを作成します。</p>
+<ul>
+<li>Shrineのロゴイメージ</li>
+<li>アプリ名（Shrine）</li>
+<li>2 つのテキスト フィールド。1 つはユーザー名の入力用、もう 1 つはパスワードの入力用です。</li>
+<li>2 つのボタン</li>
+</ul>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Android</p>
+</td><td colspan="1" rowspan="1"><p>iOS</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 298.00px" src="img/61b1e8713b49d00a.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 298.00px" src="img/7c6dc28cdc4e643b.png"></p>
+</td></tr>
+</table>
+<aside class="special"><table>
+<tr><td colspan="1" rowspan="1"><p>これは、Shrine というプロダクト用のアプリの作成をガイドする 4 つの Codelab の 1 つ目です。 すべての Codelab は、タスクを段階的に進めながら順番に実行することをお勧めします。関連する Codelab は次の場所にあります。</p>
+<ul>
+<li><a href="https://codelabs.developers.google.com/codelabs/mdc-102-flutter" target="_blank">MDC-102 Flutter: Material Structure and Layout</a></li>
+<li><a href="https://codelabs.developers.google.com/codelabs/mdc-103-flutter" target="_blank">MDC-103 Flutter: Material Theming with Color, Shape, Elevation, and Type</a></li>
+<li><a href="https://codelabs.developers.google.com/codelabs/mdc-104-flutter" target="_blank">MDC-104 Flutter: Material Advanced Components</a></li>
+</ul>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 290.00px" src="img/91be5f7919ab5154.png"></p>
+</td></tr>
+</table>
+</aside>
+<h2 is-upgraded><strong>この Codelab の MDC-Flutter コンポーネントとサブシステム</strong></h2>
+<ul>
+<li>テキストフィールド</li>
+<li>ボタン</li>
+<li>インクの波紋 (タッチ イベントの視覚的なフィードバック)</li>
+</ul>
+<aside class="special"><p>この Codelab では、MDC-Flutter が提供するデフォルト コンポーネントを使用します。 それらをカスタマイズする方法については、<a href="https://codelabs.developers.google.com/codelabs/mdc-103-flutter" target="_blank">MDC-103: 色、形状、高さ、およびタイプを使用したマテリアル デザインのテーマ</a>で学習します。</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Flutter 開発環境をセットアップする" duration="0">
+        <p>このラボを完了するには、<a href="https://docs.flutter.dev/get-started/install" target="_blank">Flutter SDK</a> と<a href="https://docs.flutter.dev/get-started/editor" target="_blank">エディタ</a>の 2 つのソフトウェアが必要です。</p>
+<p>次のいずれかのデバイスを使用して Codelab を実行できます。</p>
+<ul>
+<li>コンピューターに接続され、開発者モードに設定されている物理的な <a href="https://docs.flutter.dev/get-started/install/macos#android-setup" target="_blank">Android</a> または <a href="https://docs.flutter.dev/get-started/install/macos#deploy-to-ios-devices" target="_blank">iOS</a> デバイス。</li>
+<li><a href="https://docs.flutter.dev/get-started/install/macos#set-up-the-ios-simulator" target="_blank">iOS シミュレーター</a> (Xcode ツールのインストールが必要)。</li>
+<li><a href="https://docs.flutter.dev/get-started/install/macos#set-up-the-android-emulator" target="_blank">Android Emulator</a> (Android Studio でのセットアップが必要)。</li>
+<li>ブラウザー (デバッグには Chrome が必要です)。</li>
+<li><a href="https://docs.flutter.dev/get-started/install/windows#windows-setup" target="_blank">Windows</a>、<a href="https://docs.flutter.dev/get-started/install/linux#linux-setup" target="_blank">Linux</a>、または <a href="https://docs.flutter.dev/get-started/install/macos#macos-setup" target="_blank">macOS</a> デスクトップ アプリケーションとして。 展開する予定のプラットフォームで開発する必要があります。 そのため、Windows デスクトップ アプリを開発する場合は、適切なビルド チェーンにアクセスするために Windows で開発する必要があります。 <a href="https://docs.flutter.dev/desktop" target="_blank">docs.flutter.dev/desktop</a> で詳しく説明されているオペレーティング システム固有の要件があります。</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Codelab スターター アプリをダウンロードする" duration="0">
+        <p>Zip ダウンロード or Git Clone のどちらかの方法でダウンロードを行って下さい。</p>
+<h2 is-upgraded><strong>Zip ダウンロード</strong></h2>
+<p><a href="https://github.com/material-components/material-components-flutter-codelabs/archive/101-starter.zip" target="_blank">Download starter project</a></p>
+<p>スターター プロジェクトは、material-components-flutter-codelabs-101-starter/mdc_100_series ディレクトリにあります。</p>
+<h2 is-upgraded><strong>GitHub からクローンする</strong></h2>
+<p>GitHub からこの Codelab のクローンを作成するには、次のコマンドを実行します。</p>
+<pre>git clone https://github.com/material-components/material-components-flutter-codelabs.git
+cd material-components-flutter-codelabs/mdc_100_series
+git checkout 101-starter</pre>
+<aside class="warning"><p>さらにヘルプが必要な場合: <a href="https://help.github.com/articles/cloning-a-repository/" target="_blank">GitHub からリポジトリを複製する</a></p>
+</aside>
+<aside class="special"><p><strong>ブランチについて</strong></p>
+<p>Codelabs MDC-101 から 104 は、相互に連続して構築されます。 つまり、101 のコードが完成すると、102 のスターター コードになります。 コードはさまざまなブランチに分割されており、次のコマンドですべてを一覧表示できます。</p>
+<p>git branch --list</p>
+<p>完成したコードを確認するには、102-starter_and_101-complete ブランチをチェックアウトしてください。</p>
+</aside>
+<h2 is-upgraded><strong>プロジェクトを開いてアプリを実行する</strong></h2>
+<ol type="1" start="1">
+<li>選択したエディターでプロジェクトを開きます。</li>
+<li><a href="https://docs.flutter.dev/get-started/test-drive" target="_blank">Get Started: Test drive</a> の「Run the app」の指示に従って、選択したエディターを使用します。</li>
+</ol>
+<p>成功！ Shrine のログイン ページのスターター コードがデバイスで実行されている必要があります。 Shrine のロゴとそのすぐ下に「Shrine」という名前が表示されます。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Android</p>
+</td><td colspan="1" rowspan="1"><p>iOS</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 298.00px" src="img/1c8d3201185ff7d7.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 298.00px" src="img/9a6d552fce01b037.png"></p>
+</td></tr>
+</table>
+<p>コードを見てみましょう。</p>
+<aside class="special"><p>コード内の TODO には数字 (101、102 など) が含まれています。これらは、変更を実装する Codelab の番号を示しています。</p>
+</aside>
+<h2 is-upgraded><strong>Widgets in login.dart</strong></h2>
+<p>login.dart を開きます。 </p>
+<p>次の内容が含まれている必要があります。</p>
+<pre>import &#39;package:flutter/material.dart&#39;;
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  _LoginPageState createState() =&gt; _LoginPageState();
+}
+
+class _LoginPageState extends State&lt;LoginPage&gt; {
+  // TODO: Add text editing controllers (101)
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          children: &lt;Widget&gt;[
+            const SizedBox(height: 80.0),
+            Column(
+              children: &lt;Widget&gt;[
+                Image.asset(&#39;assets/diamond.png&#39;),
+                const SizedBox(height: 16.0),
+                const Text(&#39;SHRINE&#39;),
+              ],
+            ),
+            const SizedBox(height: 120.0),
+            // TODO: Remove filled: true values (103)
+            // TODO: Add TextField widgets (101)
+            // TODO: Add button bar (101)
+          ],
+        ),
+      ),
+    );
+  }
+}
+</pre>
+<p><strong>import</strong> ステートメントと 2 つの新しいクラスが含まれていることに注意してください。</p>
+<ul>
+<li><strong>import</strong> ステートメントは、マテリアル コンポーネントをこのファイルに取り込みます。</li>
+<li><strong>LoginPage</strong> クラスは、シミュレーターに表示されるページ全体を表します。</li>
+<li><strong>_LoginPageState</strong> クラスの <strong>build()</strong> 関数は、UI 内のすべてのウィジェットの作成方法を制御します。</li>
+</ul>
+<aside class="special"><p>Flutter UI の基本とウィジェットの詳細については、<a href="https://docs.flutter.dev/development/ui/widgets-intro" target="_blank">Flutter ウィジェット フレームワークのツアー</a>に参加するか、Codelab で<a href="https://codelabs.developers.google.com/codelabs/first-flutter-app-pt1" target="_blank">初めての Flutter アプリを作成する、パート 1 </a>を実行してください。</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="TextField ウィジェットを追加する" duration="0">
+        <p>まず、ユーザーがユーザー名とパスワードを入力するログイン ページに 2 つのテキスト フィールドを追加します。</p>
+<p>フローティング ラベルを表示し、タッチ リップルを有効にする TextField ウィジェットを使用します。</p>
+<aside class="special"><p>マテリアルのテキスト フィールドが大幅にアップグレードされ、ブランドの柔軟性が向上しました。ユーザー エクスペリエンス (UX) の広範な調査に裏打ちされた改良により、使いやすさとビジュアル デザインが向上しました。</p>
+<p><a href="https://material.io/design/components/text-fields.html" target="_blank">Material Guidelines の記事</a>で、新しいテキスト フィールドの詳細をご覧ください。</p>
+</aside>
+<p>このページは主に、子をスクロール可能な列に配置する ListView で構成されています。</p>
+<p> テキストフィールドを一番下に配置しましょう。</p>
+<h2 is-upgraded><strong>TextField ウィジェットを追加する</strong></h2>
+<p>const SizedBox(height: 120.0) の後に 2 つの新しいテキスト フィールドとスペーサーを追加します。</p>
+<pre>// TODO: Add TextField widgets (101)
+// [Name]
+TextField(
+  decoration: const InputDecoration(
+    filled: true,
+    labelText: &#39;Username&#39;,
+  ),
+),
+// spacer
+const SizedBox(height: 12.0),
+// [Password]
+TextField(
+  decoration: const InputDecoration(
+    filled: true,
+    labelText: &#39;Password&#39;,
+  ),
+  obscureText: true,
+),
+</pre>
+<p>各テキスト フィールドには<strong>、InputDecoration</strong> ウィジェットを受け取る <strong>decoration</strong>: フィールドがあります。</p>
+<p><strong>filled</strong>: フィールドは、テキスト フィールドの背景が軽く塗りつぶされていることを意味し、ユーザーがテキスト フィールドのタップまたはタッチ ターゲット領域を認識できるようにします。 </p>
+<p>2 番目のテキスト フィールドの <strong>obscureText: true</strong> 値は、ユーザーが入力した入力を、パスワードに適した箇条書きに自動的に置き換えます。</p>
+<p><a href="https://docs.flutter.dev/development/tools/hot-reload" target="_blank">ホット リロード</a>を実行するプロジェクトを保存します (キーストローク: command + s)。</p>
+<p>ユーザー名とパスワードの 2 つのテキスト フィールドを含むページが表示されます。 </p>
+<p>フローティング ラベルのアニメーションをご覧ください。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Android</p>
+</td><td colspan="1" rowspan="1"><p>iOS</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 298.00px" src="img/a5756a6cc6ccf3a0.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 298.00px" src="img/e7aedfe7937681c5.png"></p>
+</td></tr>
+</table>
+<aside class="special"><p>TextField の機能は次のとおりです。</p>
+<ul>
+<li>TextField ウィジェットの外観は簡単に変更できます。 装飾フィールドには、InputDecoration 値を指定します。</li>
+<li>MDC テキスト フィールドには、既定でタッチ フィードバック (MDC リップルまたは「インク」と呼ばれる) が表示されます。</li>
+<li>FormField は、フォームにフィールドを埋め込むための特別な機能を持つ同様のウィジェットです。</li>
+<li><a href="https://api.flutter.dev/flutter/material/TextField-class.html" target="_blank">TextField クラスのドキュメント</a></li>
+</ul>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ボタンを追加" duration="0">
+        <p>次に、ログイン ページに「キャンセル」と「次へ」の 2 つのボタンを追加します。 <strong>TextButton</strong> と <strong>ElevatedButton</strong> の 2 種類の MDC ボタン ウィジェットを使用します。</p>
+<aside class="special"><p><strong>TextButton と ElevatedButton の選択</strong></p>
+<p>単純に 2 つの ElevatedButton を表示しないのはなぜですか? 各ボタンの種類は、どのアクションが他よりも重要かを示しています。</p>
+<p>レイアウトには目立つボタンを 1 つ含める必要があります。 これにより、他のボタンの重要性が低いことが明確になります。 この目立つボタンは、アプリを進めるためにユーザーに最も求めているアクションを表しています。</p>
+<p>私たちが彼らに取ってほしくない行動は、ログインをキャンセルすることです。隆起したボタンは、隆起した外観で目を引くため、より重要なアクションに使用する必要があります。 比較すると、その左側にあるプレーン テキスト ボタンはあまり強調されていないように見えます。</p>
+<p>マテリアル ガイドラインの<a href="https://material.io/design/components/buttons.html" target="_blank">ボタンの記事</a>で、ボタンの階層について詳しく学んでください。</p>
+</aside>
+<h2 is-upgraded><strong>オーバーフローバーを追加する</strong></h2>
+<p>テキスト フィールドの後に、<strong>OverflowBar</strong> を <strong>ListView</strong> の子に追加します。</p>
+<pre>// TODO: Add button bar (101)
+OverflowBar(
+  alignment: MainAxisAlignment.end,
+  // TODO: Add a beveled rectangular border to CANCEL (103)
+  children: &lt;Widget&gt;[
+    // TODO: Add buttons (101)
+  ],
+),</pre>
+<p><strong>OverflowBar</strong> は、その子を一列に並べます。</p>
+<h2 is-upgraded><strong>ボタンを追加する</strong></h2>
+<p>次に、OverflowBar の子のリストに 2 つのボタンを追加します。</p>
+<pre>    // TODO: Add buttons (101)
+    TextButton(
+      child: const Text(&#39;CANCEL&#39;),
+      onPressed: () {
+        // TODO: Clear the text fields (101)
+      },
+    ),
+    // TODO: Add an elevation to NEXT (103)
+    // TODO: Add a beveled rectangular border to NEXT (103)
+    ElevatedButton(
+      child: const Text(&#39;NEXT&#39;),
+      onPressed: () {
+    // TODO: Show the next page (101)
+      },
+    ),</pre>
+<aside class="special"><p><strong>onPressed: フィールドに空のブロックがあるのはなぜですか?</strong></p>
+<p>null を渡した場合、またはフィールドを含めなかった場合 (デフォルトで null になります)、ボタンは無効になります。 タッチに対するフィードバックはなく、有効な動作についてよく理解できませんでした。 空のブロックを使用すると、無効化されなくなります。</p>
+<p>ボタンとその相互作用の詳細については、<a href="https://docs.flutter.dev/development/ui/interactive" target="_blank">アプリへのインタラクティブ性の追加</a>を参照してください。</p>
+</aside>
+<p>プロジェクトを保存します。 最後のテキスト フィールドの下に、次の 2 つのボタンが表示されます。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Android</p>
+</td><td colspan="1" rowspan="1"><p>iOS</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 298.00px" src="img/77c93e89ac594afe.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 298.00px" src="img/679775b6deb65c3f.png"></p>
+</td></tr>
+</table>
+<p><strong>OverflowBar</strong> がレイアウト作業を処理します。 ボタンを水平に配置するため、ボタンが隣り合って表示されます。</p>
+<p>ボタンに触れると、他に何も起こらずに、インクの波紋アニメーションが開始されます。 匿名の <strong>onPressed</strong>: 関数に機能を追加して、キャンセル ボタンでテキスト フィールドをクリアし、次のボタンで画面を閉じるようにします。</p>
+<h2 is-upgraded><strong>TextEditingController を追加する</strong></h2>
+<p>テキスト フィールドの値をクリアできるようにするために、テキストを制御する <strong>TextEditingControllers</strong> を追加します。</p>
+<p><strong>_LoginPageState</strong> クラスの宣言のすぐ下に、コントローラーを <strong>final</strong> として追加します。</p>
+<pre>  // TODO: Add text editing controllers (101)
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();</pre>
+<p>最初のテキスト フィールドの <strong>controller</strong>: フィールドで、<strong>_usernameController</strong> を設定します。</p>
+<pre>// TODO: Add TextField widgets (101)
+// [Name]
+TextField(
+  controller: _usernameController,</pre>
+<p>2 番目のテキスト フィールドの <strong>controller</strong>: フィールドで、<strong>_passwordController</strong> を設定します。</p>
+<pre>// TODO: Add TextField widgets (101)
+// [Password]
+TextField(
+  controller: _passwordController,</pre>
+<h2 is-upgraded><strong>Edit onPressed</strong></h2>
+<p>TextButton の <strong>onPressed</strong>: 関数で各コントローラーをクリアするコマンドを追加します。</p>
+<pre>    // TODO: Clear the text fields (101)
+    _usernameController.clear();
+    _passwordController.clear();</pre>
+<p>プロジェクトを保存します。 テキスト フィールドに何かを入力してキャンセルを押すと、各フィールドが再びクリアされます。</p>
+<p>このログイン フォームは良好な状態です。 ユーザーを Shrine アプリの残りの部分に進めましょう。</p>
+<h2 is-upgraded><strong>Pop</strong></h2>
+<p>このビューを閉じるには、このページ (Flutter がルートを呼び出す) をナビゲーション スタックからポップ (または削除) します。</p>
+<aside class="special"><p><strong>Navigator</strong> は、iOS の UINavigationController と同様にルートのスタックを維持します。 ルートをプッシュすると、スタックの一番上に配置されます。 スタックをポップすると、最後に追加されたルートが削除されます。 アプリの <strong>app.dart</strong> で、<strong>initialRoute: &#39;/login&#39;</strong> を呼び出して、ログイン画面をナビゲーターに追加します。</p>
+<p>ルートとナビゲーションの詳細については、<a href="https://docs.flutter.dev/cookbook/navigation/navigation-basics" target="_blank">ナビゲーションの基本</a>をご覧ください。</p>
+</aside>
+<p>ElevatedButton の <strong>onPressed</strong>: 関数で、ナビゲーターから最新のルートをポップします。</p>
+<pre>        // TODO: Show the next page (101) 
+        Navigator.pop(context);</pre>
+<p>最後に、<strong>home.dart</strong> を開き、<strong>Scaffold</strong> で <strong>resizeToAvoidBottomInset</strong> を <strong>false</strong> に設定します。</p>
+<pre>    return Scaffold(
+      // TODO: Add app bar (102)
+      // TODO: Add a grid view (102)
+      body: Center(
+        child: Text(&#39;You did it!&#39;),
+      ),
+      // TODO: Set resizeToAvoidBottomInset (101)
+      resizeToAvoidBottomInset: false,
+    );</pre>
+<p>これにより、キーボードの外観によってホームページまたはそのウィジェットのサイズが変更されないようになります。</p>
+<p>それでおしまい！ プロジェクトを保存します。 先に進み、[次へ] をクリックします。</p>
+<p>できたね！</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Android</p>
+</td><td colspan="1" rowspan="1"><p>iOS</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 298.00px" src="img/5e2e8d0b6020b497.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 298.00px" src="img/9b53d5ce551a8c0b.png"></p>
+</td></tr>
+</table>
+<p>この画面は、MDC-102 で取り組む次の Codelab の開始点です。</p>
+<aside class="special"><p>ボタンについて:</p>
+<ul>
+<li>TextButton と ElevatedButton に加えて、OutlinedButton、FloatingActionButton IconButton などがあります。</li>
+<li>ボタンとそのドキュメントを <a href="https://docs.flutter.dev/development/ui/widgets/material" target="_blank">MDC ウィジェット カタログ</a>で参照します。</li>
+</ul>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="おめでとう！" duration="0">
+        <p>テキスト フィールドとボタンを追加し、レイアウト コードを考慮する必要はほとんどありませんでした。 Flutter のマテリアル コンポーネントには多くのスタイルが用意されており、ほとんど問題なく画面に配置できます。</p>
+<aside class="special"><p>完成した MDC-101 アプリは、102-starter_and_101-complete ブランチで入手できます。</p>
+<p>そのブランチのアプリに対して、アプリのバージョンをテストできます。</p>
+</aside>
+<h2 is-upgraded><strong>次のステップ</strong></h2>
+<p>テキスト フィールドとボタンはマテリアル システムの 2 つのコア コンポーネントですが、他にもたくさんあります。 <a href="https://docs.flutter.dev/development/ui/widgets/material" target="_blank">Flutter のマテリアル コンポーネント ライブラリ</a>で残りのウィジェットを調べることもできます。</p>
+<p>または、<a href="https://codelabs.developers.google.com/codelabs/mdc-102-flutter" target="_blank">MDC-102: マテリアル デザインの構造とレイアウト</a>に進み、MDC-102 でカバーされている Flutter のコンポーネントについて学習してください。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
